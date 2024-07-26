@@ -20,25 +20,25 @@ public class BackendApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(CustomerRepository repository) {
+	public CommandLineRunner demo(CustomerRepository customerRepo) {
 		return (args) -> {
 			// save a few customers
-			repository.save(new Customer("John", "Doe"));
-			repository.save(new Customer("Robert", "Luna"));
-			repository.save(new Customer("David", "Robinson"));
-			repository.save(new Customer("John", "Reinhardt"));
-			repository.save(new Customer("Betty", "Doe"));
+			customerRepo.save(new Customer("John", "Doe"));
+			customerRepo.save(new Customer("Robert", "Luna"));
+			customerRepo.save(new Customer("David", "Robinson"));
+			customerRepo.save(new Customer("John", "Reinhardt"));
+			customerRepo.save(new Customer("Betty", "Doe"));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");
-			repository.findAll().forEach(customer -> {
+			customerRepo.findAll().forEach(customer -> {
 				log.info(customer.toString());
 			});
 			log.info("");
 
 			// fetch an individual customer by ID
-			Customer customer = repository.findById(1L);
+			Customer customer = customerRepo.findById(1L);
 			log.info("Customer found with findById(1L):");
 			log.info("--------------------------------");
 			log.info(customer.toString());
@@ -47,7 +47,7 @@ public class BackendApplication {
 			// fetch customers by last name
 			log.info("Customer found with findByLastName('Luna'):");
 			log.info("--------------------------------------------");
-			repository.findByLastName("Luna").forEach(bauer -> {
+			customerRepo.findByLastName("Luna").forEach(bauer -> {
 				log.info(bauer.toString());
 			});
 			log.info("");

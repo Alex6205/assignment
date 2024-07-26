@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.backend.model.Customer;
+
 @RestController
 public class CustomerController {
 	
-//	private List<GenericEntity> entityList = new ArrayList<>();
-//
-//    @RequestMapping("/entity/all")
-//    public List<GenericEntity> findAll() {
-//        return entityList;
-//    }
+	private List<Customer> customerList = new ArrayList<>();
+
+    @RequestMapping("/entity/all")
+    public List<Customer> findAll() {
+        return customerList;
+    }
 //
 //    @RequestMapping(value = "/entity", method = RequestMethod.POST)
 //    public GenericEntity addEntity(GenericEntity entity) {
