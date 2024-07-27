@@ -1,36 +1,41 @@
 package com.demo.backend;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.backend.model.Customer;
+import com.demo.backend.service.CustomerService;
 
 @RestController
 public class CustomerController {
-	
-	private List<Customer> customerList = new ArrayList<>();
 
-    @RequestMapping("/entity/all")
-    public List<Customer> findAll() {
-        return customerList;
-    }
-//
-//    @RequestMapping(value = "/entity", method = RequestMethod.POST)
-//    public GenericEntity addEntity(GenericEntity entity) {
-//        entityList.add(entity);
-//        return entity;
-//    }
-//
-//    @RequestMapping("/entity/findby/{id}")
-//    public GenericEntity findById(@PathVariable Long id) {
-//        return entityList.stream().
-//                 filter(entity -> entity.getId().equals(id)).
-//                   findFirst().get();
-//    }
+	@Autowired
+	private CustomerService customerService;
+
+	@GetMapping(value = "/testing/customers")
+	public List<Customer> findAll() {
+		return customerService.findAllCustomers();
+	}
+
+	@GetMapping(value = "/testing/findby/{id}")
+	public Optional<Customer> findById(@PathVariable Long id) {
+		return customerService.findCustomerById(id);
+	}
+
+	@PostMapping(value = "/testing/addCustomer", consumes = "application/json", produces = "application/json")
+	public Customer addCustomer(@RequestBody Customer customer) {
+		Customer customerDb = customerService.addCustomer(customer);
+		if (customerDb.getId() != 0) {
+			customer = customerDb;
+		}
+		return customer;
+	}
 
 }
