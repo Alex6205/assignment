@@ -24,6 +24,7 @@ public class CustomerService {
 		log.info("--------------------------------");
 		log.info(customer.toString());
 		log.info("");
+		// TODO validation ??????
 		List<Customer> listCustomers = customerRepo.findByLastNameAndFirstName(customer.getLastName(),
 				customer.getFirstName());
 		if (listCustomers.isEmpty()) {

@@ -1,0 +1,14 @@
+GET http://localhost:8080/testing/orderbycust/4
+
+[
+    {
+        "id": 4,
+        "item": "Mouse",
+        "amount": 300
+    },
+    {
+        "id": 5,
+        "item": "Keyboard",
+        "amount": 400
+    }
+]

@@ -1,6 +1,5 @@
 package com.demo.backend;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -29,38 +28,30 @@ public class BackendApplication {
 		return (args) -> {
 			// save a few customers
 			Customer cust1 = new Customer("John", "Doe");
-			Order order1 = new Order("Keyboard", 400l, cust1);
-			Set<Order> orders = new HashSet<>();
-			orders.add(order1);
-			cust1.setOrders(orders);
 			customerRepo.save(cust1);
+			Order order1 = new Order("Keyboard", 400l, cust1);
+			orderRepo.save(order1);
 
 			Customer cust2 = new Customer("Robert", "Luna");
-			Order order2 = new Order("Mousepad", 250l, cust2);
-			orders = new HashSet<>();
-			orders.add(order2);
-			cust2.setOrders(orders);
 			customerRepo.save(cust2);
+			Order order2 = new Order("Mousepad", 250l, cust2);
+			orderRepo.save(order2);
 
 			Customer cust3 = new Customer("David", "Robinson");
-			Order order3 = new Order("Monitor", 1200l, cust3);
-			orders = new HashSet<>();
-			orders.add(order3);
-			cust3.setOrders(orders);
 			customerRepo.save(cust3);
+			Order order3 = new Order("Monitor", 1200l, cust3);
+			orderRepo.save(order3);
 
 			Customer cust4 = new Customer("John", "Reinhardt");
-			Order order4 = new Order("Mouse", 300l, cust4);
-			Order order5 = new Order("Keyboard", 400l, cust4);
-			orders = new HashSet<>();
-			orders.add(order4);
-			orders.add(order5);
-			cust4.setOrders(orders);
 			customerRepo.save(cust4);
+			Order order4 = new Order("Mouse", 300l, cust4);
+			orderRepo.save(order4);
+			Order order5 = new Order("Keyboard", 400l, cust4);
+			orderRepo.save(order5);
 
 			Customer cust5 = new Customer("Betty", "Doe");
 			customerRepo.save(cust5);
-	
+
 //			// fetch all orders
 //			log.info("Orders found with findAll():");
 //			log.info("-------------------------------");
@@ -72,14 +63,15 @@ public class BackendApplication {
 //			List<Customer> custList = customerRepo.findByLastName(null);
 //			orderRepo.findByCustomer(cust1, null);
 			Customer customerDb = customerRepo.findById(1l);
-			customerDb.setOrders(orderRepo.findByCustomer(customerDb, null));
+			Set<Order> ordersSet = (orderRepo.findByCustomerId(1l));
 
 			// fetch an individual customer by ID
 
-//			log.info("Customer found with findById(1L):");
-//			log.info("--------------------------------");
-//			log.info(customerDb.toString());
-//			log.info("");
+			log.info("Customer found with findById(1L):");
+			log.info("--------------------------------");
+			log.info(customerDb.toString());
+			log.info(ordersSet.toString());
+			log.info("");
 //
 //			// fetch all customers
 //			log.info("Customers found with findAll():");

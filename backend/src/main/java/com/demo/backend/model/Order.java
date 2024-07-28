@@ -1,5 +1,10 @@
 package com.demo.backend.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,8 +25,8 @@ public class Order {
 	private Long amount; // for real system must be BigDecimal
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "customer_id", nullable = false)
-//	private Long customerId;
-//	@Transient
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
 	private Customer customer;
 
 	public Order(String item, Long amount, Customer customer) {
@@ -40,14 +45,6 @@ public class Order {
 
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -64,14 +61,25 @@ public class Order {
 		return amount;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", item=" + item + ", amount=" + amount + ", customer=" + customer + "]";
+		return "Order [id=" + id + ", item=" + item + ", amount=" + amount + ", customerId=" + customer.getId() + "]";
 	}
-
 
 }

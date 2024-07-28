@@ -1,0 +1,28 @@
+GET http://localhost:8080/testing/customers
+[
+    {
+        "id": 1,
+        "firstName": "John",
+        "lastName": "Doe"
+    },
+    {
+        "id": 2,
+        "firstName": "Robert",
+        "lastName": "Luna"
+    },
+    {
+        "id": 3,
+        "firstName": "David",
+        "lastName": "Robinson"
+    },
+    {
+        "id": 4,
+        "firstName": "John",
+        "lastName": "Reinhardt"
+    },
+    {
+        "id": 5,
+        "firstName": "Betty",
+        "lastName": "Doe"
+    }
+]

@@ -1,0 +1,24 @@
+POST http://localhost:8080/testing/addcustomer
+
+body raw
+
+{
+      "firstName": "John2",
+        "lastName": "Reinhardt"
+    }
+	
+	
+	added:
+	
+	{
+    "id": 8,
+    "firstName": "John2",
+    "lastName": "Reinhardt"
+}
+
+exist:
+{
+    "id": null,
+    "firstName": "John2",
+    "lastName": "Reinhardt"
+}

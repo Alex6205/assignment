@@ -1,4 +1,4 @@
-package com.demo.backend;
+package com.demo.backend.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,18 +24,17 @@ public class CustomerController {
 		return customerService.findAllCustomers();
 	}
 
-	@GetMapping(value = "/testing/findby/{id}")
+	@GetMapping(value = "/testing/customer/{id}")
 	public Optional<Customer> findById(@PathVariable Long id) {
 		return customerService.findCustomerById(id);
 	}
 
-	@PostMapping(value = "/testing/addCustomer", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/testing/addcustomer", consumes = "application/json", produces = "application/json")
 	public Customer addCustomer(@RequestBody Customer customer) {
 		Customer customerDb = customerService.addCustomer(customer);
-		if (customerDb.getId() != 0) {
+		if (customerDb.getId() != null) {
 			customer = customerDb;
 		}
 		return customer;
 	}
-
 }

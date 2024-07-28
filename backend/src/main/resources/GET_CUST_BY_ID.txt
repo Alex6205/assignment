@@ -1,0 +1,8 @@
+GET http://localhost:8080/testing/customer/3
+{
+    "id": 3,
+    "firstName": "David",
+    "lastName": "Robinson",
+    "orders": [
+                    ]
+        }
