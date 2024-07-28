@@ -22,9 +22,9 @@ public class OrderService {
 		return orderRepo.findByCustomerId(customerId);
 	}
 
-	public Order addOrder(Order order, Long customerId) {
+	public Order addOrder(Order order) {
 		// TODO validation
-		Optional<Customer> customer = customerService.findCustomerById(customerId);
+		Optional<Customer> customer = customerService.findCustomerById(order.getCustomer().getId());
 		//validate Optional
 		Order orderNew = new Order(order.getItem(), order.getAmount(), customer.get());
 		orderRepo.save(orderNew);

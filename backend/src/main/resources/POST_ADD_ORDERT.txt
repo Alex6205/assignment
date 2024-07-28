@@ -1,11 +1,14 @@
-POST http://localhost:8080/testing/addorder?customerId=4
+POST http://localhost:8080/restapi/orders
 
-Query Params: 4
 
 body: 
 {
         "item": "Mouse",
-        "amount": 300
+        "amount": 300,
+        "customer":{"id": 5,
+        "firstName": "Betty",
+        "lastName": "Doe"
+           }
     }
 	
 	
@@ -13,5 +16,10 @@ body:
 	{
     "id": 6,
     "item": "Mouse",
-    "amount": 300
+    "amount": 300,
+    "customer": {
+        "id": 5,
+        "firstName": "Betty",
+        "lastName": "Doe"
+    }
 }

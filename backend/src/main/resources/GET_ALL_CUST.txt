@@ -1,4 +1,4 @@
-GET http://localhost:8080/testing/customers
+GET http://localhost:8080/restapi/customers
 [
     {
         "id": 1,
