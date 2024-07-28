@@ -1,0 +1,17 @@
+POST http://localhost:8080/testing/addorder?customerId=4
+
+Query Params: 4
+
+body: 
+{
+        "item": "Mouse",
+        "amount": 300
+    }
+	
+	
+	respone json:
+	{
+    "id": 6,
+    "item": "Mouse",
+    "amount": 300
+}
