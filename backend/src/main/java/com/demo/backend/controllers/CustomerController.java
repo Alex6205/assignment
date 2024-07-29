@@ -42,17 +42,16 @@ public class CustomerController {
 		return customer;
 	}
 
-    @PutMapping(value = "/{id}")
+	@PutMapping(value = "/{id}")
 //    @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable( "id" ) Long id, @RequestBody Customer customer) {
-//        Preconditions.checkNotNull(resource);
-//        RestPreconditions.checkNotNull(service.getById(resource.getId()));
-//        service.update(resource);
- }
+	public void update(@PathVariable Long id) {
+//TODO
+	}
 
-    @DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/{id}")
 //    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable("id") Long id) {
+	public void delete(@PathVariable Long id) {
+		// TODO
 //        service.deleteById(id);
-    }
+	}
 }

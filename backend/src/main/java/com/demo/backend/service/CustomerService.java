@@ -21,7 +21,7 @@ public class CustomerService {
 
 	public Customer addCustomer(Customer customer) {
 		// check if customer in DB
-		log.info("--------------------------------");
+		log.info("------POST add customer-----------------");
 		log.info(customer.toString());
 		log.info("");
 		// TODO validation ??????
@@ -37,10 +37,19 @@ public class CustomerService {
 	public List<Customer> findAllCustomers() {
 		List<Customer> customerList = new ArrayList<>();
 		customerRepo.findAll().forEach(customerList::add);
+		log.info("--------GET all customers-------------------");
+		customerList.forEach(customer -> {
+			log.info(customer.toString());
+		});
+		log.info("");
 		return customerList;
 	}
 
 	public Optional<Customer> findCustomerById(Long id) {
-		return customerRepo.findById(id);
+		Optional<Customer> customer = customerRepo.findById(id);
+		log.info("------GET by Id of customer-----------------");
+		log.info(customer.toString());
+		log.info("");
+		return customer;
 	}
 }
