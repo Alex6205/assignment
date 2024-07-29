@@ -9,7 +9,7 @@
               <a routerLink="/customers" routerLinkActive="active" class="btn btn-info">List Customers</a>
                 </li>
             <li class="list-inline-item">
-              <a routerLink="/adduser" class="btn btn-info">Add Customer</a>
+              <a routerLink="/addCustomer" class="btn btn-info">Add Customer</a>
                 </li>
           </ul>
         </div>
@@ -18,23 +18,4 @@
     </div>
   </div>
 </div>
-<div class="card my-5">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let customer of customers">
-          <td>{{ customer.id }}</td>
-          <td>{{ customer.firstName }}</td>
-          <td>{{ customer.lastName }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+

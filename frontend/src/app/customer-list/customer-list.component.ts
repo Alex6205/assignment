@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer';
 import { CustomerService } from '../customer-service.service';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [NgFor],
+  imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, NgFor],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.css'
 })
