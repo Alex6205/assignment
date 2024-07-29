@@ -1,15 +1,15 @@
 
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Customer } from './customer';
 import { CustomerService } from './customer-service.service';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgFor],
+  imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, NgFor],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
