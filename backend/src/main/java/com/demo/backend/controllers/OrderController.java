@@ -3,6 +3,7 @@ package com.demo.backend.controllers;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.demo.backend.model.Order;
 import com.demo.backend.service.OrderService;
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/restapi/orders")
 public class OrderController {
 	@Autowired
