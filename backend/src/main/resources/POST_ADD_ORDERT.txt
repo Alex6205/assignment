@@ -8,8 +8,7 @@ body:
         "customer":{"id": 5,
         "firstName": "Betty",
         "lastName": "Doe"
-           }
-    }
+ }
 	
 	
 	response json:
