@@ -1,0 +1,23 @@
+<div class="card my-5">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.item }}</td>
+                    <td>{{ order.amount }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <li class="list-inline-item">
+            <a routerLink="/addOrder/{{id}}" class="btn btn-info">Add Order</a>
+        </li>
+    </div>
+</div>
