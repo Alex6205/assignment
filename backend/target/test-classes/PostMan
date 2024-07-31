@@ -1,0 +1,77 @@
+GET http://localhost:4204/rest-on-ejb/user/list
+
+[
+    {
+        "firstName": "John",
+        "id": 1,
+        "lastName": "Doe"
+    },
+    {
+        "firstName": "Robert",
+        "id": 2,
+        "lastName": "Luna"
+    },
+    {
+        "firstName": "John2",
+        "id": 3,
+        "lastName": "Reinhardt"
+    }
+]
+
+
+POST http://localhost:4204/rest-on-ejb/user/restapi/customers
+
+Body, raw:
+{
+      "firstName": "John2",
+        "lastName": "Reinhardt"
+    }
+    
+Response:    
+{
+    "firstName": "John2",
+    "id": 3,
+    "lastName": "Reinhardt"
+}
+
+
+GET http://localhost:4204/rest-on-ejb/order/restapi/orders
+
+[
+    {
+        "amount": 123,
+        "customer": {
+            "firstName": "John",
+            "id": 1,
+            "lastName": "Doe"
+        },
+        "id": 51,
+        "item": "pad"
+    }
+]
+
+POST http://localhost:4204/rest-on-ejb/order/restapi/orders
+
+Body, raw
+{
+        "amount": 1235,
+        "customer": {
+            "firstName": "John",
+            "id": 1,
+            "lastName": "Doe"
+        },
+        "id": 0,
+        "item": "pad"
+    }
+    
+    Response
+    {
+    "amount": 1235,
+    "customer": {
+        "firstName": "John",
+        "id": 1,
+        "lastName": "Doe"
+    },
+    "id": 52,
+    "item": "pad"
+}
