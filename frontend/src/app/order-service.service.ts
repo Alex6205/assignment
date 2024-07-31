@@ -11,7 +11,7 @@ export class OrderService {
   private ordersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.ordersUrl = 'http://localhost:8080/restapi/orders';
+    this.ordersUrl = 'http://localhost:4204/rest-on-ejb/order/restapi/orders';
   }
 
   public findById(id: string | null): Observable<Order[]> {

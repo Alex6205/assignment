@@ -11,7 +11,7 @@ export class CustomerService {
   private customersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.customersUrl = 'http://localhost:8080/restapi/customers';
+    this.customersUrl = 'http://localhost:4204/rest-on-ejb/users/restapi/customers';
   }
 
   public findAll(): Observable<Customer[]> {
