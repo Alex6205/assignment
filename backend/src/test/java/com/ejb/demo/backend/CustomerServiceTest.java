@@ -49,10 +49,10 @@ public class CustomerServiceTest {
 		context = EJBContainer.createEJBContainer(properties).getContext();
 
 		// create some records
-		customerService = (CustomerService) context.lookup("java:global/rest-on-ejb/CustomerService");
+		customerService = (CustomerService) context.lookup("java:global/backend/CustomerService");
 		customers.add(customerService.create("John", "Doe"));
 		customers.add(customerService.create("Robert", "Luna"));
-		orderService = (OrderService) context.lookup("java:global/rest-on-ejb/OrderService");
+		orderService = (OrderService) context.lookup("java:global/backend/OrderService");
 		Customer customer = new Customer("", "");
 		customer.setId(1);
 		Order order = new Order("pad", 123, customer);
@@ -113,7 +113,7 @@ public class CustomerServiceTest {
 	@Test
 	public void findAllCustomers() throws Exception {
 		System.out.println("*******************************************************************");
-		Thread.sleep(100000);
+//		Thread.sleep(100000);
 		String users = WebClient.create("http://localhost:4204/rest-on-ejb").path("/user/restapi/customers")
 				.get(String.class);
 		assertFalse(users.isEmpty());

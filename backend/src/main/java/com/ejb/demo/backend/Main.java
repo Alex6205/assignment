@@ -23,7 +23,7 @@ public class Main {
 		context = EJBContainer.createEJBContainer(properties).getContext();
 
 		// create some records
-		service = (CustomerService) context.lookup("java:global/rest-on-ejb/CustomerService");
+		service = (CustomerService) context.lookup("java:global/backend/CustomerService");
 		customers.add(service.create("John", "Doe"));
 		customers.add(service.create("Robert", "Luna"));
 		System.out.println("*******************************************************************");
