@@ -1,25 +1,6 @@
-GET http://localhost:4204/rest-on-ejb/user/list
-
-[
-    {
-        "firstName": "John",
-        "id": 1,
-        "lastName": "Doe"
-    },
-    {
-        "firstName": "Robert",
-        "id": 2,
-        "lastName": "Luna"
-    },
-    {
-        "firstName": "John2",
-        "id": 3,
-        "lastName": "Reinhardt"
-    }
-]
 
 
-POST http://localhost:4204/rest-on-ejb/user/restapi/customers
+POST http://localhost:4204/backend/user/restapi/customers
 
 Body, raw:
 {
@@ -35,7 +16,7 @@ Response:
 }
 
 
-GET http://localhost:4204/rest-on-ejb/order/restapi/orders
+GET http://localhost:4204/backend/order/restapi/orders
 
 [
     {
@@ -50,7 +31,7 @@ GET http://localhost:4204/rest-on-ejb/order/restapi/orders
     }
 ]
 
-POST http://localhost:4204/rest-on-ejb/order/restapi/orders
+POST http://localhost:4204/backend/order/restapi/orders
 
 Body, raw
 {

@@ -71,7 +71,7 @@ public class CustomerServiceTest {
 		Customer customer = new Customer("", "");
 		customer.setId(1);
 		Order order = new Order("pad", 123, customer);
-		WebClient.create("http://localhost:4204/rest-on-ejb").path("/order/restapi/orders").post(order);
+		WebClient.create("http://localhost:4204/backend").path("/order/restapi/orders").post(order);
 
 		List<Order> list = orderService.findAllOrders(); // list(0, 100);
 		for (Order u : list) {
@@ -86,19 +86,19 @@ public class CustomerServiceTest {
 //	@Test
 	public void findOrdersByCustId() {
 		List<Order> list = orderService.findOrdersByCustomer(1l);
-		for (Order u : list) {
-			if (!orders.contains(u)) {
-				customerService.delete(u.getId());
-				return;
-			}
-		}
+		assertFalse(list.isEmpty());
+	}
+	@Test
+	public void findAllOrders() {
+		List<Order> list = orderService.findAllOrders();
+		assertFalse(list.isEmpty());
 
 	}
 
 	@Test
 	public void createCustomer() {
 		Customer customer = new Customer("Betty", "Doe");
-		WebClient.create("http://localhost:4204/rest-on-ejb").path("/user/restapi/customers").post(customer);
+		WebClient.create("http://localhost:4204/backend").path("/user/restapi/customers").post(customer);
 
 		List<Customer> list = customerService.findAllCustomers(); // list(0, 100);
 		for (Customer u : list) {
@@ -114,7 +114,7 @@ public class CustomerServiceTest {
 	public void findAllCustomers() throws Exception {
 		System.out.println("*******************************************************************");
 //		Thread.sleep(100000);
-		String users = WebClient.create("http://localhost:4204/rest-on-ejb").path("/user/restapi/customers")
+		String users = WebClient.create("http://localhost:4204/backend").path("/user/restapi/customers")
 				.get(String.class);
 		assertFalse(users.isEmpty());
 	}
