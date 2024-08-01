@@ -1,6 +1,26 @@
+GET
+http://localhost:4204/backend/users/restapi/customers
+[
+    {
+        "firstName": "John",
+        "id": 1,
+        "lastName": "Doe"
+    },
+    {
+        "firstName": "Robert",
+        "id": 2,
+        "lastName": "Luna"
+    },
+    {
+        "firstName": "fff",
+        "id": 3,
+        "lastName": "Reinhardt"
+    }
+]
 
 
-POST http://localhost:4204/backend/users/restapi/customers
+POST 
+http://localhost:4204/backend/users/restapi/customers
 
 Body, raw:
 {
@@ -16,7 +36,8 @@ Response:
 }
 
 
-GET http://localhost:4204/backend/orders/restapi/orders
+GET 
+http://localhost:4204/backend/orders/restapi/orders
 
 [
     {
@@ -31,7 +52,8 @@ GET http://localhost:4204/backend/orders/restapi/orders
     }
 ]
 
-POST http://localhost:4204/backend/orders/restapi/orders
+POST 
+http://localhost:4204/backend/orders/restapi/orders
 
 Body, raw
 {

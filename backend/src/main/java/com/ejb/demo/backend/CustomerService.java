@@ -59,17 +59,23 @@ public class CustomerService {
 			}
 		}
 		em.persist(customer);
-		return Response.ok().header("Access-Control-Allow-Origin", "http://localhost:4200")
-				.header("Access-Control-Allow-Credentials", "true")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-				.header("Access-Control-Allow-Methods", "POST").entity(customer).build();
+		
+		Response resp = Response.ok().header("Access-Control-Allow-Origin", "*")
+//		.header("Access-Control-Allow-Credentials", "true")
+//		.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+		.header("Access-Control-Allow-Methods", "POST, GET").entity(customer).build();
+		
+		return resp;
 	}
 
 	@Path("/restapi/customers")
 	@GET
 	public Response findAllCustomers() {
 		List<Customer> found = findAllCustomersDB();
-		return Response.ok(found).header("Access-Control-Allow-Origin", "*").build();
+		return Response.ok(found).header("Access-Control-Allow-Origin", "*")
+//				.header("Access-Control-Allow-Credentials", "true")
+//				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Methods", "POST, GET").build();
 	}
 
 	@Path("/create")

@@ -10,11 +10,12 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "Orders")
 @NamedQuery(name = "order.list", query = "select u from Order u")
-@NamedQueries(value = { @NamedQuery(name = "order.findbyid", query = "select u from Order u where u.customer_id=?1") })
+@NamedQueries(value = {	@NamedQuery(name = "order.findbyid", query = "select o from Order o where o.customer =:customer") })
 @XmlRootElement(name = "order")
 public class Order {
 	@Id
@@ -24,6 +25,8 @@ public class Order {
 	private long amount;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "customer_id", nullable = false)
+//	@Valid
+	@XmlTransient
 	private Customer customer;
 
 	public Order(String item, long amount) {

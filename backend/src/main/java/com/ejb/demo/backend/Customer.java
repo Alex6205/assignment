@@ -27,7 +27,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Customers")
-@NamedQueries({ @NamedQuery(name = "user.list", query = "select u from Customer u order by u.lastName") })
+@NamedQueries(value = { @NamedQuery(name = "user.list", query = "select u from Customer u order by u.lastName"),
+		@NamedQuery(name = "user.findbyid", query = "select c from Customer c where c.id=?1") })
+
 @XmlRootElement(name = "user")
 public class Customer implements Cloneable {
 

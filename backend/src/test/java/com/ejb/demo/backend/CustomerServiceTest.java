@@ -70,12 +70,12 @@ public class CustomerServiceTest {
 	@Test
 	public void createOrder() {
 		List<Order> listBefore = orderService.findAllOrdersDb();
-		Customer customer = new Customer("", "");
+		Customer customer = new Customer("John", "Doe");
 		customer.setId(1);
 		Order order = new Order("pad", 123, customer);
-		Response resp = WebClient.create("http://localhost:4204/backend").path("/orders/restapi/orders").post(order);
+		Response resp = WebClient.create("http://localhost:4204/backend").path("/order/restapi/orders").post(order);
 
-		List<Order> listAftrer = orderService.findAllOrdersDb(); // list(0, 100);
+		List<Order> listAftrer = orderService.findAllOrdersByCustIdDb(customer); // list(0, 100);
 		assertFalse(listBefore.size() == listAftrer.size() + 1);
 		for (Order u : listAftrer) {
 			if (!orders.contains(u)) {
@@ -86,15 +86,20 @@ public class CustomerServiceTest {
 		fail("Order was not added");
 	}
 
-//	@Test
+	@Test
 	public void findOrdersByCustId() {
-//		List<Order> list = orderService.findOrdersByCustomer(1l);
+
+		Response resp = WebClient.create("http://localhost:4204/backend").path("/order/restapi/orders/customer/1").get();
+//		List<Order> list = orderService.findAllOrdersByCustIdDb(1l);
+		List<Order> list = orderService.findAllOrdersDb();
 //		assertFalse(list.isEmpty());
 	}
 
 	@Test
 	public void findAllOrders() {
 		List<Order> list = orderService.findAllOrdersDb();
+		Response resp = WebClient.create("http://localhost:4204/backend").path("/order/restapi/orders").get();
+
 		assertFalse(list.isEmpty());
 
 	}
@@ -105,7 +110,7 @@ public class CustomerServiceTest {
 		Response resp = WebClient.create("http://localhost:4204/backend").path("/users/restapi/customers")
 				.post(customer);
 
-		List<Customer> list = customerService.findAllCustomersDB(); 
+		List<Customer> list = customerService.findAllCustomersDB();
 		for (Customer u : list) {
 			if (!customers.contains(u)) {
 				customerService.delete(u.getId());
@@ -117,8 +122,7 @@ public class CustomerServiceTest {
 
 	@Test
 	public void findAllCustomers() throws Exception {
-		System.out.println("*******************************************************************");
-//		Thread.sleep(1000000);
+		Thread.sleep(1000000);
 		String users = WebClient.create("http://localhost:4204/backend").path("/users/restapi/customers")
 				.get(String.class);
 		assertFalse(users.isEmpty());
