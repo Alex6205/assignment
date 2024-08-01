@@ -30,10 +30,10 @@ public class OrderService {
 	@Path("/restapi/orders")
 	public Response addOrder(Order order) {
 		em.persist(order);
-		return Response.ok(order.copy()).header("Access-Control-Allow-Origin", "http://localhost:4200")
+		return Response.ok().header("Access-Control-Allow-Origin", "http://localhost:4200")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-				.header("Access-Control-Allow-Methods", "POST").entity("").build();
+				.header("Access-Control-Allow-Methods", "POST").entity(order.copy()).build();
 	}
 
 	@Path("/restapi/orders")

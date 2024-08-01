@@ -59,10 +59,10 @@ public class CustomerService {
 			}
 		}
 		em.persist(customer);
-		return Response.ok(customer).header("Access-Control-Allow-Origin", "http://localhost:4200")
+		return Response.ok().header("Access-Control-Allow-Origin", "http://localhost:4200")
 				.header("Access-Control-Allow-Credentials", "true")
 				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-				.header("Access-Control-Allow-Methods", "POST").entity("").build();
+				.header("Access-Control-Allow-Methods", "POST").entity(customer).build();
 	}
 
 	@Path("/restapi/customers")
