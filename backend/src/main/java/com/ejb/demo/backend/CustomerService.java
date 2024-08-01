@@ -41,7 +41,7 @@ import jakarta.ws.rs.core.Response;
  */
 @Singleton
 @Lock(LockType.WRITE)
-@Path("/user")
+@Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 
 public class CustomerService {
@@ -59,21 +59,19 @@ public class CustomerService {
 			}
 		}
 		em.persist(customer);
-
-		return Response.ok(customer.copy()).build();
+		return Response.ok(customer).header("Access-Control-Allow-Origin", "http://localhost:4200")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Methods", "POST").entity("").build();
 	}
-	
+
 	@Path("/restapi/customers")
 	@GET
-	public List<Customer> findAllCustomers() {
-		List<Customer> customers = new ArrayList<Customer>();
-		List<Customer> found = em.createNamedQuery("user.list", Customer.class).setFirstResult(0).setMaxResults(100)
-				.getResultList();
-		for (Customer u : found) {
-			customers.add(u.copy());
-		}
-		return customers;
+	public Response findAllCustomers() {
+		List<Customer> found = findAllCustomersDB();
+		return Response.ok(found).header("Access-Control-Allow-Origin", "*").build();
 	}
+
 	@Path("/create")
 	@PUT
 	public Customer create(@QueryParam("firsName") String firsName, @QueryParam("lastName") String lastName) {
@@ -89,8 +87,7 @@ public class CustomerService {
 	public List<Customer> list(@QueryParam("first") @DefaultValue("0") int first,
 			@QueryParam("max") @DefaultValue("20") int max) {
 		List<Customer> customers = new ArrayList<Customer>();
-		List<Customer> found = em.createNamedQuery("user.list", Customer.class).setFirstResult(first).setMaxResults(max)
-				.getResultList();
+		List<Customer> found = findAllCustomersDB();
 		for (Customer u : found) {
 			customers.add(u.copy());
 		}
@@ -125,11 +122,20 @@ public class CustomerService {
 		if (customer == null) {
 			throw new IllegalArgumentException("user id " + id + " not found");
 		}
-
 		customer.setFirstName(firsName);
 		customer.setLastName(lastName);
 		em.merge(customer);
 
 		return Response.ok(customer.copy()).build();
+	}
+
+	public List<Customer> findAllCustomersDB() {
+		List<Customer> customers = new ArrayList<Customer>();
+		List<Customer> found = em.createNamedQuery("user.list", Customer.class).setFirstResult(0).setMaxResults(100)
+				.getResultList();
+		for (Customer u : found) {
+			customers.add(u.copy());
+		}
+		return customers;
 	}
 }

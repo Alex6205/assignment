@@ -33,6 +33,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import jakarta.ejb.embeddable.EJBContainer;
+import jakarta.ws.rs.core.Response;
 
 public class CustomerServiceTest {
 
@@ -68,29 +69,32 @@ public class CustomerServiceTest {
 
 	@Test
 	public void createOrder() {
+		List<Order> listBefore = orderService.findAllOrdersDb();
 		Customer customer = new Customer("", "");
 		customer.setId(1);
 		Order order = new Order("pad", 123, customer);
-		WebClient.create("http://localhost:4204/backend").path("/order/restapi/orders").post(order);
+		Response resp = WebClient.create("http://localhost:4204/backend").path("/orders/restapi/orders").post(order);
 
-		List<Order> list = orderService.findAllOrders(); // list(0, 100);
-		for (Order u : list) {
+		List<Order> listAftrer = orderService.findAllOrdersDb(); // list(0, 100);
+		assertFalse(listBefore.size() == listAftrer.size() + 1);
+		for (Order u : listAftrer) {
 			if (!orders.contains(u)) {
 				customerService.delete(u.getId());
 				return;
 			}
 		}
-		fail("user was not added");
+		fail("Order was not added");
 	}
 
 //	@Test
 	public void findOrdersByCustId() {
-		List<Order> list = orderService.findOrdersByCustomer(1l);
-		assertFalse(list.isEmpty());
+//		List<Order> list = orderService.findOrdersByCustomer(1l);
+//		assertFalse(list.isEmpty());
 	}
+
 	@Test
 	public void findAllOrders() {
-		List<Order> list = orderService.findAllOrders();
+		List<Order> list = orderService.findAllOrdersDb();
 		assertFalse(list.isEmpty());
 
 	}
@@ -98,23 +102,24 @@ public class CustomerServiceTest {
 	@Test
 	public void createCustomer() {
 		Customer customer = new Customer("Betty", "Doe");
-		WebClient.create("http://localhost:4204/backend").path("/user/restapi/customers").post(customer);
+		Response resp = WebClient.create("http://localhost:4204/backend").path("/users/restapi/customers")
+				.post(customer);
 
-		List<Customer> list = customerService.findAllCustomers(); // list(0, 100);
+		List<Customer> list = customerService.findAllCustomersDB(); 
 		for (Customer u : list) {
 			if (!customers.contains(u)) {
 				customerService.delete(u.getId());
 				return;
 			}
 		}
-		fail("customer was not added");
+		fail("Customer was not added");
 	}
 
 	@Test
 	public void findAllCustomers() throws Exception {
 		System.out.println("*******************************************************************");
-//		Thread.sleep(100000);
-		String users = WebClient.create("http://localhost:4204/backend").path("/user/restapi/customers")
+//		Thread.sleep(1000000);
+		String users = WebClient.create("http://localhost:4204/backend").path("/users/restapi/customers")
 				.get(String.class);
 		assertFalse(users.isEmpty());
 	}

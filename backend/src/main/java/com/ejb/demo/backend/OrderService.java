@@ -20,7 +20,7 @@ import jakarta.ws.rs.core.Response;
  */
 @Singleton
 @Lock(LockType.WRITE)
-@Path("/order")
+@Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
 public class OrderService {
 	@PersistenceContext
@@ -30,24 +30,34 @@ public class OrderService {
 	@Path("/restapi/orders")
 	public Response addOrder(Order order) {
 		em.persist(order);
-		return Response.ok(order.copy()).build();
+		return Response.ok(order.copy()).header("Access-Control-Allow-Origin", "http://localhost:4200")
+				.header("Access-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+				.header("Access-Control-Allow-Methods", "POST").entity("").build();
 	}
 
 	@Path("/restapi/orders")
 	@GET
-	public List<Order> findOrdersByCustomer(long customerId) {
+	public Response findOrdersByCustomer(long customerId) {
 		List<Order> orders = new ArrayList<>();
-		List<Order> found = em.createNamedQuery("order.findbyid", Order.class).setParameter("id", customerId)
-				.setMaxResults(100).getResultList();
+//TODO		List<Order> found = em.createNamedQuery("order.findbyid", Order.class).setParameter("id", customerId)
+//				.setMaxResults(100).getResultList();
+		List<Order> found = em.createNamedQuery("order.list", Order.class).setFirstResult(0).setMaxResults(100)
+				.getResultList();
 		for (Order u : found) {
 			orders.add(u.copy());
 		}
-		return orders;
+		return Response.ok(found).header("Access-Control-Allow-Origin", "*").build();
 	}
 
 	@Path("/restapi/orders")
 	@GET
-	public List<Order> findAllOrders() {
+	public Response findAllOrders() {
+		List<Order> found = findAllOrdersDb();
+		return Response.ok(found).header("Access-Control-Allow-Origin", "*").build();
+	}
+
+	public List<Order> findAllOrdersDb() {
 		List<Order> orders = new ArrayList<>();
 		List<Order> found = em.createNamedQuery("order.list", Order.class).setFirstResult(0).setMaxResults(100)
 				.getResultList();

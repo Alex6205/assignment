@@ -1,6 +1,6 @@
 
 
-POST http://localhost:4204/backend/user/restapi/customers
+POST http://localhost:4204/backend/users/restapi/customers
 
 Body, raw:
 {
@@ -16,7 +16,7 @@ Response:
 }
 
 
-GET http://localhost:4204/backend/order/restapi/orders
+GET http://localhost:4204/backend/orders/restapi/orders
 
 [
     {
@@ -31,7 +31,7 @@ GET http://localhost:4204/backend/order/restapi/orders
     }
 ]
 
-POST http://localhost:4204/backend/order/restapi/orders
+POST http://localhost:4204/backend/orders/restapi/orders
 
 Body, raw
 {
