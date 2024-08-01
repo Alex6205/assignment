@@ -1,1 +1,58 @@
 
+
+POST http://localhost:4204/backend/users/restapi/customers
+
+Body, raw:
+{
+      "firstName": "John2",
+        "lastName": "Reinhardt"
+    }
+    
+Response:    
+{
+    "firstName": "John2",
+    "id": 3,
+    "lastName": "Reinhardt"
+}
+
+
+GET http://localhost:4204/backend/orders/restapi/orders
+
+[
+    {
+        "amount": 123,
+        "customer": {
+            "firstName": "John",
+            "id": 1,
+            "lastName": "Doe"
+        },
+        "id": 51,
+        "item": "pad"
+    }
+]
+
+POST http://localhost:4204/backend/orders/restapi/orders
+
+Body, raw
+{
+        "amount": 1235,
+        "customer": {
+            "firstName": "John",
+            "id": 1,
+            "lastName": "Doe"
+        },
+        "id": 0,
+        "item": "pad"
+    }
+    
+    Response
+    {
+    "amount": 1235,
+    "customer": {
+        "firstName": "John",
+        "id": 1,
+        "lastName": "Doe"
+    },
+    "id": 52,
+    "item": "pad"
+}
